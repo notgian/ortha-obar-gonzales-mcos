@@ -12,7 +12,7 @@ int main()
 
     // Slow
     
-    fp = fopen("in", "r");
+    fp = fopen("sample-input.txt", "r");
 
     fscanf(fp, "%d", &size);
     Point points[size];
@@ -30,14 +30,14 @@ int main()
 
     for (int i = 0; i <= convexHull.top; i++)
     { // input convex hull
-        fprintf(fp, "%lf %lf\n", convexHull.data[i].x, convexHull.data[i].y);
+        fprintf(fp, "%-9lf %-9lf\n", convexHull.data[i].x, convexHull.data[i].y);
     }
 
     fclose(fp);
 
     // Fast
 
-    fp = fopen("in", "r");
+    fp = fopen("sample-input.txt", "r");
 
     fscanf(fp, "%d", &size);
     for (int i = 0; i < size; i++)
@@ -54,7 +54,7 @@ int main()
 
     for (int i = 0; i <= convexHull.top; i++)
     { // input convex hull
-        fprintf(fp, "%lf %lf\n", convexHull.data[i].x, convexHull.data[i].y);
+        fprintf(fp, "%-9lf %-9lf\n", convexHull.data[i].x, convexHull.data[i].y);
     }
 
     fclose(fp);
