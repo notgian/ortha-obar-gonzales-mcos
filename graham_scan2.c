@@ -1,5 +1,6 @@
 #include "geom.h"
 #include "stack.h"
+#include "sort.h"
 #include "gs_helpers.c"
 
 /* grahamScanFast:      the Graham Scan algorithim using a fast sorting algorithm
