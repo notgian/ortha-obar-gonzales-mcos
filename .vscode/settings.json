@@ -3,6 +3,7 @@
         "sort.h": "c",
         "time.h": "c",
         "timer.h": "c",
-        "math.h": "c"
+        "math.h": "c",
+        "stdio.h": "c"
     }
 }
