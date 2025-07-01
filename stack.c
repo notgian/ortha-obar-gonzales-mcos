@@ -1,96 +1,96 @@
 #include "stack.h"
 
-/*function initializes the stack by setting its top variable to -1
-@param convexHull: the stack to be initizalized
+/* Create: initializes the stack by setting its top variable to -1
+    @param stack: the stack to be initizalized
 */
-void Create(Stack *convexHull)
+void Create(Stack *stack)
 {
-  convexHull->top = -1;
+    stack->top = -1;
 }
 
-/*function pushes an element in the stack only if the stack is not full
-@param convexHull: variable name of the stack
-@param elem: the element to be pushed into the stack
+/* Push: pushes an element in the stack only if the stack is not full
+    @param stack: variable name of the stack
+    @param elem: the element to be pushed into the stack
 */
-void Push(Stack *convexHull, Point elem)
+void Push(Stack *stack, Point elem)
 {
-  if (isFull(convexHull) == 1)
-  {
-    printf("Stack is overflowing! Cannot push (%lf,%lf)\n!", elem.x, elem.y);
-  }
-  else
-  {
-    convexHull->top = convexHull->top + 1;
-    convexHull->data[convexHull->top].x = elem.x;
-    convexHull->data[convexHull->top].y = elem.y;
-  }
+    if (isFull(stack) == 1)
+    {
+        printf("Stack is overflowing! Cannot push (%lf,%lf)\n!", elem.x, elem.y);
+    }
+    else
+    {
+        stack->top = stack->top + 1;
+        stack->data[stack->top].x = elem.x;
+        stack->data[stack->top].y = elem.y;
+    }
 }
 
-/*function pops an element in the stack only if the stack is not empty
-@param convexHull: the stack where the element is to be popped from
+/* Pop: removes the top element in the stack if and only if the stack is not empty
+    @param stack: the stack where the element is to be popped from
 */
-void Pop(Stack *convexHull)
+void Pop(Stack *stack)
 {
-  if (isEmpty(convexHull) == 1)
-  {
-    printf("Stack is underflowing! Cannot pop!\n");
-  }
-  else
-  {
-    convexHull->top = convexHull->top - 1;
-  }
+    if (isEmpty(stack) == 1)
+    {
+        printf("Stack is underflowing! Cannot pop!\n");
+    }
+    else
+    {
+        stack->top = stack->top - 1;
+    }
 }
 
-/*function returns the top element only if the stack is not empty
-@param convexHull: the stack where the element is from
-return value: returns the rightmost element from the stack
+/* Top: returns the top in the stack if and only if the stack is not empty
+    @param stack: the stack where the element is from
+    @return int:  returns the rightmost element from the stack
 */
-Point Top(Stack *convexHull)
+Point Top(Stack *stack)
 {
-  Point returnVal = {-1, -1};
-  if (isEmpty(convexHull) == 1)
-  {
-    printf("Stack is empty! No top element\n!");
-  }
-  else
-  {
-    returnVal = convexHull->data[convexHull->top];
-  }
-  return returnVal;
+    Point returnVal = {-1, -1};
+    if (isEmpty(stack) == 1)
+    {
+        printf("Stack is empty! No top element\n!");
+    }
+    else
+    {
+        returnVal = stack->data[stack->top];
+    }
+    return returnVal;
 }
 
-/*function returns the second top element only if the stack has more than 2 elements
-@param convexHull: the stack where the element is from
-return value: returns the second rightmost element form the stack
+/* nextToTop: returns the second top element if and only if the stack has more than 2 elements
+    @param stack:  the stack where the element is from
+    @return Point: returns the second rightmost element form the stack
 */
-Point nextToTop(Stack *convexHull)
+Point nextToTop(Stack *stack)
 {
-  Point returnVal = {-1, -1};
-  if (convexHull->top < 1)
-  {
-    printf("Stack does not have a next to top element\n!");
-  }
-  else
-  {
-    returnVal = convexHull->data[convexHull->top - 1];
-  }
-  return returnVal;
+    Point returnVal = {-1, -1};
+    if (stack->top < 1)
+    {
+        printf("Stack does not have a next to top element\n!");
+    }
+    else
+    {
+        returnVal = stack->data[stack->top - 1];
+    }
+    return returnVal;
 }
 
-/*function checks if the stack is full
-@param convexHull: the stack to be checked
-reutrn value: 1 if full and 0 if false
+/* isFull: checks if the stack is full
+    @param stack: the stack to be checked
+    @reutrn int:  1 if full and 0 if false
 */
-int isFull(Stack *convexHull)
+int isFull(Stack *stack)
 {
-  return convexHull->top == MAX - 1;
+    return stack->top == MAX - 1;
 }
 
-/*function checks if the elements is empty
-@param convexHull: the stack to be checked
-return value: 1 if empty and 0 if false
+/* isEmpty: checks if the stack is empty
+    @param stack: the stack to be checked
+    @return int:  1 if empty and 0 if false
 */
-int isEmpty(Stack *convexHull)
+int isEmpty(Stack *stack)
 {
-  return convexHull->top == -1;
+    return stack->top == -1;
 }

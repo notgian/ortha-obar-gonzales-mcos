@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include "stack.c"
 #include "sort.c"
-#include "graham_scan1.c"
+#include "geom.c"
+#include "graham_scan.c"
 
 int main()
 {
@@ -22,7 +23,7 @@ int main()
     }
     fclose(fp);
 
-    grahamScanSlow(p0, points, size, &convexHull);
+    grahamScanSlow(points, size, &convexHull);
     char outIns[100] = "outins";
     
     fp = fopen(outIns, "w");
@@ -46,7 +47,7 @@ int main()
     }
     fclose(fp);
 
-    grahamScanFast(p0, points, size, &convexHull);
+    grahamScanFast(points, size, &convexHull);
     char outMrg[100] = "outmrg";
     
     fp = fopen(outMrg, "w");

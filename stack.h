@@ -1,5 +1,14 @@
 #include <stdio.h>
-#include "structStack.h"
+#include "geom.h"
+#pragma once
+
+#define MAX 32768
+
+typedef struct
+{
+    Point data[MAX];
+    int top;
+} Stack;
 
 void Create(Stack *convexHull);
 void Push(Stack *convexHull, Point elem);
