@@ -1,6 +1,78 @@
 #include "sort.h"
 #include "math.h"
 
+void arrSwap(Point arr[], int i, int j) 
+{
+    Point temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
+
+/* 
+
+    FAST ALGORITHIM ASSIGNED: Merge sort
+
+*/
+
+
+void mergeSortRecursion(Point p0, Point arr[], int l, int r)
+{
+    int mid = (l+r)/2;
+
+    if (l >= r)
+    {
+        return;
+    }
+
+    mergeSortRecursion(p0, arr, l, mid); // Recursive call for left half
+    mergeSortRecursion(p0, arr, mid+1, r); // Recursive call for right half
+
+    // copying array
+
+    int tempLeftLen = mid - l + 1;
+    int tempRightLen = r - mid;
+
+    Point tempLeft[tempLeftLen];
+    Point tempRight[tempRightLen];
+
+    for (int i = 0; i < tempLeftLen; i++)
+        tempLeft[i] = arr[l+i];
+
+    for (int i = 0; i < tempRightLen; i++)
+        tempRight[i] = arr[mid+1+i];
+    
+    // merge step
+
+    int k = 0;
+    int pL = 0;
+    int pR = 0;
+    
+    while (k < r-l+1)
+    {
+        if (pL < tempLeftLen && pR < tempRightLen)
+        {
+            if ( comparePolarOrder(p0, tempLeft[pL], tempRight[pR]) == 1 )
+                arr[l+k] = tempLeft[pL++];
+            else
+                arr[l+k] = tempRight[pR++];
+        }
+        else 
+        {
+            if (pL < tempLeftLen)
+                arr[l+k] = tempLeft[pL++];
+            else
+                arr[l+k] = tempRight[pR++];
+        }
+        k++;
+    }
+}
+
+void mergeSort(Point p0, Point arr[], int n)
+{
+    mergeSortRecursion(p0, arr, 0, n-1);
+}
+
+
 void insertionSort(Point P0, Point points[], int n)
 {
   for (int i = 1; i < n - 1; i++)
