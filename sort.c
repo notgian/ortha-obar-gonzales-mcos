@@ -2,8 +2,6 @@
 #include "sort.h"
 #include "geom.h"
 
-// Helper Functions
-
 /* arrSwap:     swaps the ith and jth elements in an array. Presupposed that i and j are valid indexes of the array
     @param arr: the array where elements will be swapped
     @param i:   the index of the first element in the swap

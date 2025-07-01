@@ -16,7 +16,7 @@ void Push(Stack *stack, Point elem)
 {
     if (isFull(stack) == 1)
     {
-        printf("Stack is overflowing! Cannot push (%lf,%lf)\n!", elem.x, elem.y);
+        printf("Stack overflow error! Cannot push.\n", elem.x, elem.y);
     }
     else
     {
@@ -29,14 +29,17 @@ void Push(Stack *stack, Point elem)
 /* Pop: removes the top element in the stack if and only if the stack is not empty
     @param stack: the stack where the element is to be popped from
 */
-void Pop(Stack *stack)
+Point Pop(Stack *stack)
 {
+    Point returnValue;
+    returnValue.x = -99999999.0;
+    returnValue.y = -99999999.0;
+
     if (isEmpty(stack) == 1)
-    {
-        printf("Stack is underflowing! Cannot pop!\n");
-    }
+        printf("Stack underflow error! Cannot pop.\n");
     else
     {
+        returnValue = stack->data[stack->top];
         stack->top = stack->top - 1;
     }
 }
@@ -50,7 +53,7 @@ Point Top(Stack *stack)
     Point returnVal = {-1, -1};
     if (isEmpty(stack) == 1)
     {
-        printf("Stack is empty! No top element\n!");
+        printf("Stack is empty! No top element.\n");
     }
     else
     {
@@ -68,7 +71,7 @@ Point nextToTop(Stack *stack)
     Point returnVal = {-1, -1};
     if (stack->top < 1)
     {
-        printf("Stack does not have a next to top element\n!");
+        printf("Stack does not have a next to top element.\n!");
     }
     else
     {

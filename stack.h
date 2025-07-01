@@ -12,7 +12,7 @@ typedef struct
 
 void Create(Stack *convexHull);
 void Push(Stack *convexHull, Point elem);
-void Pop(Stack *convexHull);
+Point Pop(Stack *convexHull);
 Point Top(Stack *convexHull);
 Point nextToTop(Stack *convexHull);
 int isFull(Stack *convexHull);

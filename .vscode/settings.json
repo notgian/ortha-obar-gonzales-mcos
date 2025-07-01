@@ -4,6 +4,7 @@
         "time.h": "c",
         "timer.h": "c",
         "math.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "string.h": "c"
     }
 }
