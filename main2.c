@@ -43,7 +43,7 @@ int main() {
     startTimer(&timer);
     grahamScanFast(points, inputSize, &convexHull);
     endTimer(&timer);
-    elapsed = timer.elapsed;
+    elapsed = timer.elapsed_ms;
 
     printf("          Execution completed in %10lfms\n", elapsed);
     printf("========================================================\n");

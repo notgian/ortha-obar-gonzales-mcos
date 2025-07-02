@@ -15,5 +15,5 @@ void startTimer(Timer *timer)
 void endTimer(Timer *timer)
 {
     timer->end_time = clock();
-    timer->elapsed = (double) timer->end_time - timer->start_time;
+    timer->elapsed_ms = (double) 1000 * (timer->end_time - timer->start_time) / CLOCKS_PER_SEC;
 }

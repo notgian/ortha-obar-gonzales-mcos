@@ -4,7 +4,7 @@
 typedef struct  {
     clock_t start_time;
     clock_t end_time;
-    double elapsed;
+    double elapsed_ms;
 } Timer;
 
 void startTimer(Timer *timer);
