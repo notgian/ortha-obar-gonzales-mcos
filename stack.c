@@ -16,7 +16,7 @@ void Push(Stack *stack, Point elem)
 {
     if (isFull(stack) == 1)
     {
-        printf("Stack overflow error! Cannot push.\n");
+        printf("Stack overflow error! Cannot push.\n", elem.x, elem.y);
     }
     else
     {
@@ -42,8 +42,6 @@ Point Pop(Stack *stack)
         returnValue = stack->data[stack->top];
         stack->top = stack->top - 1;
     }
-
-    return returnValue;
 }
 
 /* Top: returns the top in the stack if and only if the stack is not empty
