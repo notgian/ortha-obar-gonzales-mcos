@@ -1,6 +1,18 @@
 #include "graph.c"
 #include <stdio.h>
 
+GraphNode *getInTempNodeList(GraphNode *tempNodeList[], int n, char *stringKey) {
+	GraphNode *ptr = NULL;
+	printf("\nKEY: %s\n",stringKey);
+	for (int i=0; i<n; i++) {
+		printf("%s ", tempNodeList[i]->id);
+		if (strcmp(tempNodeList[i]->id, stringKey) == 0)
+			ptr = tempNodeList[i];
+	}
+	
+	return ptr;
+}
+
 int readFile(char *filename, Graph *graph) {
 	FILE *fp;
 
@@ -12,24 +24,25 @@ int readFile(char *filename, Graph *graph) {
 	int nNodes;
 	fscanf(fp, "%d", &nNodes);
 
-	// Create each node outside of the graph, connect them all, and only then put them into the graph
-	// Nodes will be input into the graph the same order they appear in the first column of the file
+	GraphNode *tempNodes[nNodes];
+	int tempN = 0;
 
 	for (int i = 0; i < nNodes; i++) {
 		String20 nodeName;
 		fscanf(fp, "%s", nodeName);
+		printf("\n%s ", nodeName);
 
-		GraphNode *pCurrentNode = getGraphNodeByString(graph, nodeName);
+		GraphNode *pCurrentNode = getInTempNodeList(tempNodes, nNodes, nodeName);
 
-		if (getGraphNodeByString(graph, nodeName) == NULL) {
+		if (pCurrentNode == NULL) {
 			pCurrentNode = createNode(nodeName);
-			addNodeToGraph(graph, pCurrentNode);
+			tempNodes[tempN] = pCurrentNode;
+			tempN++;
 		}
 
-		pCurrentNode->idInt = i;
+		addNodeToGraph(graph, pCurrentNode);
 
-		int lineEnd = 0;
-		while (!lineEnd) {
+		while (1) {
 			String20 neighborName;
 			fscanf(fp, "%s", neighborName);
 
@@ -37,12 +50,13 @@ int readFile(char *filename, Graph *graph) {
 			if (strcmp(neighborName, "-1") == 0) {
 				break;
 			}
-			
-			GraphNode *pNeighborNode = getGraphNodeByString(graph, neighborName);
+
+			GraphNode *pNeighborNode = getInTempNodeList(tempNodes, nNodes, neighborName);
 
 			if (pNeighborNode == NULL) {
 				pNeighborNode = createNode(neighborName);
-				addNodeToGraph(graph, pNeighborNode);
+				tempNodes[tempN] = pNeighborNode;
+				tempN++;
 			}
 
 			addNeighbor(pCurrentNode, pNeighborNode);
@@ -60,14 +74,14 @@ int main() {
 
 	readFile("G.txt", graph);
 
+	printf("\n\n%d", graph->n);
 	for (int i=0; i < graph->n; i++) {
-		printf("\n[%d]%s ",  graph->nodes[i]->idInt, graph->nodes[i]->idStr);
+		printf("\n%s->", graph->nodes[i]->id);
 		for (int j=0; j < graph->nodes[i]->n; j++) {
-			printf("%s ", graph->nodes[i]->neighbors[j]);
+			printf("%s->", graph->nodes[i]->neighbors[j]);
 		}
+		printf("\\");
 	}
-	
-
-	
+		
 	return 0;
 }

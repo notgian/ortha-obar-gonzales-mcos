@@ -5,10 +5,10 @@
 #define MAX_NODES 20
 
 typedef char String20[21];
+typedef char String8[9];
 
 struct gNode {
-	String20 idStr;
-	int idInt;
+	String8 id;
 	struct gNode *neighbors[MAX_NODES];	
 	int n;
 };
@@ -25,10 +25,10 @@ typedef struct {
  * 
  * @return         - pointer to a newly created, empty graph node structure
  */
-GraphNode *createNode(char *idString) {
-	GraphNode *node = malloc(sizeof(GraphNode)); 
+GraphNode *createNode(char *iding) {
+	GraphNode *node = malloc(sizeof(GraphNode)); 	
 
-	strcpy(node->idStr, idString);
+	strcpy(node->id, iding);
 
 	node->n = 0;
 	for (int i=0; i<MAX_NODES; i++) {
@@ -71,15 +71,7 @@ void addNodeToGraph(Graph *graph, GraphNode *node) {
  */
 GraphNode *getGraphNodeByString(Graph *graph, char *key) {
 	for (int i = 0; i < graph-> n; i++) {
-		if (strcmp(graph->nodes[i]->idStr, key) == 0)
-			return graph->nodes[i];
-	}
-	return NULL;
-}
-
-GraphNode *getGraphNodeByInt(Graph *graph, int index) {
-	for (int i = 0; i < graph-> n; i++) {
-		if (graph->nodes[i]->idInt == index)
+		if (strcmp(graph->nodes[i]->id, key) == 0)
 			return graph->nodes[i];
 	}
 	return NULL;
@@ -121,7 +113,7 @@ void addNeighbor(GraphNode *destNode, GraphNode *node2) {
 		}
 	}
 
-	// printf("\n| %s %s\n", destNode->idStr, node2->idStr);
+	// printf("\n| %s %s\n", destNode->id, node2->id);
 };
 // void addEdge(GraphNode *node1, GraphNode *node2) {
 // 	if (node1 != NULL && node2 != NULL) {
@@ -135,6 +127,6 @@ void addNeighbor(GraphNode *destNode, GraphNode *node2) {
 // 		}
 // 	}
 
-// 	printf("\n| %s %s\n", node1->idStr, node2->idStr);
+// 	printf("\n| %s %s\n", node1->id, node2->id);
 // };
 
