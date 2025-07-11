@@ -3,9 +3,7 @@
 
 GraphNode *getInTempNodeList(GraphNode *tempNodeList[], int n, char *stringKey) {
 	GraphNode *ptr = NULL;
-	printf("\nKEY: %s\n",stringKey);
 	for (int i=0; i<n; i++) {
-		printf("%s ", tempNodeList[i]->id);
 		if (strcmp(tempNodeList[i]->id, stringKey) == 0)
 			ptr = tempNodeList[i];
 	}
@@ -25,14 +23,14 @@ int readFile(char *filename, Graph *graph) {
 	fscanf(fp, "%d", &nNodes);
 
 	GraphNode *tempNodes[nNodes];
+	
 	int tempN = 0;
 
 	for (int i = 0; i < nNodes; i++) {
 		String20 nodeName;
 		fscanf(fp, "%s", nodeName);
-		printf("\n%s ", nodeName);
 
-		GraphNode *pCurrentNode = getInTempNodeList(tempNodes, nNodes, nodeName);
+		GraphNode *pCurrentNode = getInTempNodeList(tempNodes, tempN, nodeName);
 
 		if (pCurrentNode == NULL) {
 			pCurrentNode = createNode(nodeName);
@@ -51,7 +49,7 @@ int readFile(char *filename, Graph *graph) {
 				break;
 			}
 
-			GraphNode *pNeighborNode = getInTempNodeList(tempNodes, nNodes, neighborName);
+			GraphNode *pNeighborNode = getInTempNodeList(tempNodes, tempN, neighborName);
 
 			if (pNeighborNode == NULL) {
 				pNeighborNode = createNode(neighborName);
@@ -65,6 +63,8 @@ int readFile(char *filename, Graph *graph) {
 
 		// addGraphNode(graph, pCurrentNode);
 	}
+
+	return 1;
 }
 
 
@@ -72,16 +72,18 @@ int main() {
 	
 	Graph *graph = createGraph();
 
-	readFile("G.txt", graph);
+	readFile("Y.txt", graph);
 
 	printf("\n\n%d", graph->n);
 	for (int i=0; i < graph->n; i++) {
 		printf("\n%s->", graph->nodes[i]->id);
 		for (int j=0; j < graph->nodes[i]->n; j++) {
-			printf("%s->", graph->nodes[i]->neighbors[j]);
+			printf("%s->", graph->nodes[i]->neighbors[j]->id);
 		}
 		printf("\\");
 	}
+
+	printf("\n\n");
 		
 	return 0;
 }
