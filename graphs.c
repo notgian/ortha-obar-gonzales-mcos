@@ -82,8 +82,8 @@ void addAdjacency(Graph *G, char *firstVertex, char *nextVertex) {
 int readInput(char *fileName, Graph *G, Graph *sortedG){
   int valid = 0;//determines of the fileName is valid
   int numVertices;//holds the number of vertices 
-  char currentLine[256];
-  char *firstWord;
+  // char currentLine[256];
+  char firstWord[MAX_VERTEX_NAME];
   char vertex[MAX_VERTEX_NAME];
   char nextVertex[MAX_VERTEX_NAME];
   FILE *file = fopen(fileName, "r");
@@ -96,20 +96,20 @@ int readInput(char *fileName, Graph *G, Graph *sortedG){
     valid = 1;
     fscanf(file, "%d\n", &numVertices);
     for (int i = 0; i < numVertices; i++){//iterate trough the file based on the number of vertices
-      fgets(currentLine, sizeof(currentLine), file);//gets the text in each line and stores in the currentLine variable
-      firstWord = strtok(currentLine, " \n"); //gets the first word from the currentLine
-      if (firstWord == NULL) {
+      // fgets(currentLine, sizeof(currentLine), file);//gets the text in each line and stores in the currentLine variable
+      // firstWord = strtok(currentLine, " \n"); //gets the first word from the currentLine
+      fscanf(file, "%s", firstWord);
+      if (strcmp(firstWord, "") == 0) {
         continue; //iterate immediately to the next line if currentLine is empty
       }
       strcpy(vertex, firstWord);//copies the firstWord to the vertex
       addVertex(G, vertex);//adds the vertices of the graph
       addVertex(sortedG, vertex);
-      while ((firstWord = strtok(NULL, " \n\r")) && strcmp(firstWord, "-1") != 0){//iterate though the line adding each vertex up until reaching -1
+      while (fscanf(file, "%s", firstWord) == 1 && strcmp(firstWord, "-1") != 0){//iterate though the line adding each vertex up until reaching -1
         strcpy(nextVertex, firstWord); //stores the adjancency vertix
         addAdjacency(G, vertex, nextVertex);//adds the adjancencies of the vertices in the graph
-        addAdjacency(sortedG, vertex, nextVertex);//adds the adjancencies of the vertices in the graph
+        addAdjacency(sortedG, vertex, nextVertex);
       }
-
     }
   }
   fclose(file);
