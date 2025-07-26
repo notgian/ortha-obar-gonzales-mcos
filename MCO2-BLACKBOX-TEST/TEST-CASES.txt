@@ -1,0 +1,25 @@
+MCO2 TEST CASES (does not include test for the bonus portion)
+
+1.  TEST1.CMD
+       A.TXT given sample graph in MCO2 specs; test for a graph with just 1 vertex, 0 edge
+
+2.  TEST2.CMD
+       B.TXT test for a graph with max. of 20 vertices 
+
+3.  TEST3.CMD
+       C.TXT test for a disconnected graph, i.e., not all vertices will be traversed
+
+4.  TEST4.CMD
+       D.TXT test for a disconnected graph (D.TXT and E.TXT contain the same data as C.TXT)
+
+5.  TEST5.CMD
+       E.TXT test for a disconnected graph (D.TXT and E.TXT contain the same data as C.TXT)
+
+6.  TEST6.CMD
+       G.TXT given sample graph in MCO2 specs
+
+7.  TEST7.CMD
+       G.TXT test for a start vertex not found (for BFS & DFS traversal)
+
+8.  TEST8.CMD
+      test for an input text file (Q.TXT) that does not exist

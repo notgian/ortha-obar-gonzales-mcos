@@ -12,9 +12,10 @@ int main(){
   initGraph(&G);
   initGraph(&sortedG);
   if(readInput(fileName, &G ,&sortedG) == 1){
-    
+    char graphName = fileName[0];  
+     
     snprintf(outputFileName, sizeof(outputFileName), "%c-SET.TXT", fileName[0]);//output file name for file#1
-    outputSets(outputFileName, &sortedG); //output file #1
+    outputSets(graphName, outputFileName, &sortedG); //output file #1
     snprintf(outputFileName, sizeof(outputFileName), "%c-DEGREE.TXT", fileName[0]);//output file name for file#2
     outputDegrees(outputFileName, &sortedG); //output file #2
     snprintf(outputFileName, sizeof(outputFileName), "%c-LIST.TXT", fileName[0]);//output file name for file #3

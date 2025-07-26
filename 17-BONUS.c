@@ -6,15 +6,19 @@
 int main() {
     Graph graphA;
     Graph graphASorted;
+    initGraph(&graphA);
+    initGraph(&graphASorted);
 
     Graph graphB;
     Graph graphBSorted;
+    initGraph(&graphB);
+    initGraph(&graphBSorted);
 
-    char fileNameA[6];
+    char fileNameA[64];
     char graphAName;
     FILE *fileA;
 
-    char fileNameB[6];
+    char fileNameB[64];
     char graphBName;
     FILE *fileB;
 
@@ -54,6 +58,7 @@ int main() {
 
     int isSubgraph = 1;
 
+    // For vertices
     for (int i=0; i < graphBSorted.vertexCount; i++) {
         char vertexInB[MAX_VERTEX_NAME];
         strcpy(vertexInB, graphBSorted.vertices[i]);
@@ -103,9 +108,9 @@ int main() {
             // To avoid duplicates and ensure that (u,v) such that u > v in ASCII comparison. Put simply, ensuring they're alphabetically sorted.
             if (strcmp(vertexInB, adjacencyInB) > 0) 
                 continue;
-
+                
             if (vertexIndexInA > -1) {
-                for (int l=0; l < graphASorted.adjacencyCount[vertexIndexInB]; l++) {
+                for (int l=0; l < graphASorted.adjacencyCount[vertexIndexInA]; l++) {
                     char adjacencyInA[MAX_VERTEX_NAME];
                     strcpy(adjacencyInA, graphASorted.adjacencyList[vertexIndexInA][l]);
     

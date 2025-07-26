@@ -9,6 +9,7 @@ void initGraph(Graph *G){
   //initializes the adjacency list to nothing for now
   for(int i = 0; i < MAX_VERTICES; i++){//iterates through every possible index
     G->adjacencyCount[i] = 0;
+    G->vertices[i][0] = '\0';
     for(int j = 0; j < MAX_VERTICES; j++){//iterates through every possible adjacent vertex
       G->adjacencyList[i][j][0] = '\0'; //this clears each adjacency string
     }
@@ -82,7 +83,6 @@ void addAdjacency(Graph *G, char *firstVertex, char *nextVertex) {
 int readInput(char *fileName, Graph *G, Graph *sortedG){
   int valid = 0;//determines of the fileName is valid
   int numVertices;//holds the number of vertices 
-  // char currentLine[256];
   char firstWord[MAX_VERTEX_NAME];
   char vertex[MAX_VERTEX_NAME];
   char nextVertex[MAX_VERTEX_NAME];
@@ -96,8 +96,6 @@ int readInput(char *fileName, Graph *G, Graph *sortedG){
     valid = 1;
     fscanf(file, "%d\n", &numVertices);
     for (int i = 0; i < numVertices; i++){//iterate trough the file based on the number of vertices
-      // fgets(currentLine, sizeof(currentLine), file);//gets the text in each line and stores in the currentLine variable
-      // firstWord = strtok(currentLine, " \n"); //gets the first word from the currentLine
       fscanf(file, "%s", firstWord);
       if (strcmp(firstWord, "") == 0) {
         continue; //iterate immediately to the next line if currentLine is empty
@@ -232,16 +230,6 @@ void BFSTraversal(Graph *G, char *startVertex, int *visitOrder, int *count) {
   }
 }
 
-// TODO: revisit if you should keep or remove this function (also present in DFS traversal)
-void stringToUpper(char *string) {
-  for (int i=0; i < strlen(string); i++) {   
-      if (string[i] >= 'a' && string[i] <= 'z') 
-      string[i] = string[i] - 32;
-      else
-      string[i] = string[i];
-  }
-}
-
 void DFSTraversal(Graph *G, char startVertex[MAX_VERTEX_NAME], char traversalStringOutput[MAX_VERTICES*MAX_VERTEX_NAME]) {
   char stack[MAX_VERTICES][MAX_VERTEX_NAME];
   int stackTop = -1;
@@ -277,19 +265,10 @@ void DFSTraversal(Graph *G, char startVertex[MAX_VERTEX_NAME], char traversalStr
       }
       
       if (elligible) {
-        // For name comparison
-        char adjNameUpper[MAX_VERTEX_NAME];
-        strcpy(adjNameUpper, adjacencyName);
-        stringToUpper(adjNameUpper);
-
-        char vertexNameUpper[MAX_VERTEX_NAME];
-        strcpy(vertexNameUpper, vertexName);
-        stringToUpper(vertexNameUpper);
-
         if (strlen(vertexName) == 0)
           strcpy(vertexName, adjacencyName);
         // traversal vertices alphabetically
-        else if (strcmp(adjNameUpper, vertexNameUpper) < 0) {
+        else if (strcmp(adjacencyName, vertexName) < 0) {
           strcpy(vertexName, adjacencyName);
         }
       }

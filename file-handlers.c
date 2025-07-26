@@ -5,7 +5,7 @@
 @param fileName - holds the name of the input file
 @param sortedG - holds the sorted values of the graph
 */
-void outputSets(char *outputFileName, Graph *sortedG){
+void outputSets(char graphName, char *outputFileName, Graph *sortedG){
     int first = 1;
     char *u;
     char *v;
@@ -17,7 +17,7 @@ void outputSets(char *outputFileName, Graph *sortedG){
     }
   
     // For vertex set
-    fprintf(file, "V(G)={");
+    fprintf(file, "V(%c)={", graphName);
     for (int i = 0; i < sortedG->vertexCount; i++){
       fprintf(file, "%s", sortedG->vertices[i]);
   
@@ -28,7 +28,7 @@ void outputSets(char *outputFileName, Graph *sortedG){
     }
     fprintf(file, "}\n");
   
-    fprintf(file, "E(G)={");
+    fprintf(file, "E(%c)={", graphName);
     for(int i = 0; i < sortedG->vertexCount; i++){
       u = sortedG->vertices[i];
       
