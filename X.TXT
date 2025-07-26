@@ -1,0 +1,4 @@
+3
+Diana Hal  Bruce -1
+Bruce Diana  -1
+Hal Diana -1
