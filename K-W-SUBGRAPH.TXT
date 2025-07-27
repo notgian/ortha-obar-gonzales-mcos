@@ -1,7 +1,0 @@
-Bruce +
-Diana +
-Hal +
-Jean +
-(Diana,Hal) +
-(Diana,Jean) +
-W is a subgraph of K.
