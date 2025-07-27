@@ -3,6 +3,7 @@
         "string.h": "c",
         "stdio.h": "c",
         "stdbool.h": "c",
-        "graphs.h": "c"
+        "graphs.h": "c",
+        "file-handlers.h": "c"
     }
 }
